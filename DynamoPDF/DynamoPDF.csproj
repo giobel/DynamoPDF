@@ -50,6 +50,12 @@
     <Reference Include="itextsharp">
       <HintPath>..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="ProtoCore">
       <HintPath>..\..\..\..\..\..\Program Files\Dynamo\Dynamo Core\2\ProtoCore.dll</HintPath>
       <Private>False</Private>
@@ -79,6 +85,7 @@
     <Compile Include="Content\List.cs" />
     <Compile Include="Content\PDFContent.cs" />
     <Compile Include="Content\Color.cs" />
+    <Compile Include="CustomProperties.cs" />
     <Compile Include="Extensions\AnnotationsFromPDF.cs" />
     <Compile Include="Content\Paragraph.cs" />
     <Compile Include="Geometries\PrintSettings.cs" />

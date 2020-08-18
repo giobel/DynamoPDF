@@ -10,12 +10,16 @@ using Autodesk.DesignScript.Geometry;
 namespace DynamoPDF
 {
     [Autodesk.DesignScript.Runtime.IsVisibleInDynamoLibrary(false)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class ToPDF
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     {
 
 
         [Autodesk.DesignScript.Runtime.IsVisibleInDynamoLibrary(false)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static PdfAnnotation ToPDFFreeText(this string content, PdfWriter writer, float x, float y)
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             iTextSharp.text.Rectangle rect = new iTextSharp.text.Rectangle(x, y);
             var app = new PdfContentByte(writer);
@@ -24,13 +28,17 @@ namespace DynamoPDF
         }
 
         [Autodesk.DesignScript.Runtime.IsVisibleInDynamoLibrary(false)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static PDFCoords ToPDFCoords(this Point point)
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             return new PDFCoords(point.X, point.Y);
         }
 
         [Autodesk.DesignScript.Runtime.IsVisibleInDynamoLibrary(false)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static PdfAnnotation ToPDFLine(this Autodesk.DesignScript.Geometry.Line line, string content, PdfWriter writer)
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             var start = line.StartPoint.ToPDFCoords();
             var end = line.EndPoint.ToPDFCoords();
@@ -43,7 +51,9 @@ namespace DynamoPDF
         }
 
         [Autodesk.DesignScript.Runtime.IsVisibleInDynamoLibrary(false)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static PdfAnnotation ToPDFPolygon(this Autodesk.DesignScript.Geometry.PolyCurve polycurve, string content, PdfWriter writer)
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             List<float> points = new List<float>();
             foreach (var curve in polycurve.Curves())
@@ -61,7 +71,9 @@ namespace DynamoPDF
         }
 
         [Autodesk.DesignScript.Runtime.IsVisibleInDynamoLibrary(false)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static PdfAnnotation ToPDFPolygon(this Autodesk.DesignScript.Geometry.Polygon polygon, string content, PdfWriter writer)
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             List<float> points = new List<float>();
             foreach (var pt in polygon.Points)
@@ -79,7 +91,9 @@ namespace DynamoPDF
         }
 
         [Autodesk.DesignScript.Runtime.IsVisibleInDynamoLibrary(false)]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static PdfAnnotation ToPDFCircle(this Autodesk.DesignScript.Geometry.Circle circle, string content, PdfWriter writer)
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             
             iTextSharp.text.Rectangle rect = new iTextSharp.text.Rectangle(

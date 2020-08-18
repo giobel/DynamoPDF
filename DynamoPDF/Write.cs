@@ -7,9 +7,12 @@ using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using System.IO;
 
+
 namespace DynamoPDF
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class Write
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     {
 
         /// <summary>
@@ -97,11 +100,6 @@ namespace DynamoPDF
             doc.Close();
 
         }
-
-
-
-
-
-
+       
     }
 }

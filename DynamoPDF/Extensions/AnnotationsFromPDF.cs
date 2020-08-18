@@ -48,7 +48,9 @@ namespace DynamoPDF
                 return 0;
         }
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static float ToFloat(this PdfObject obj)
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
         {
             float value = 0f;
             if (float.TryParse(obj.ToString(), out value))

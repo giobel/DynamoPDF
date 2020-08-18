@@ -13,9 +13,15 @@ namespace DynamoPDF.Geometries
     /// </summary>
     public class PrintSettings 
     {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public double Thickness;
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public DSCore.Color Stroke;
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public DSCore.Color Fill;
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>
         /// Create new Print Settings for PDF Geometry
