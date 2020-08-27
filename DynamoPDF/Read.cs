@@ -1,15 +1,13 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using Autodesk.DesignScript.Geometry;
 using Autodesk.DesignScript.Runtime;
-using Dynamo.Utilities;
-using Dynamo.Models;
+using System.Windows;
+using System.Threading;
 
 namespace DynamoPDF
 {
@@ -157,6 +155,34 @@ namespace DynamoPDF
             return content;
         }
 
+        /// <summary>
+        /// Get the content of the clipboard
+        /// </summary>
+        /// <param name="refresh"></param>
+        /// <returns></returns>
+        public static string GetClipboardContent(bool refresh)
+        {
+            string textNoteContent = "";
+
+            Thread t = new Thread((ThreadStart)(() => {
+
+                try
+                {
+                    textNoteContent = Clipboard.GetDataObject().GetData(DataFormats.Text).ToString(); //uses PresentationCore
+                }
+                catch
+                {
+                    textNoteContent = "Clipboard is empty!";
+                }
+
+            }));
+
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+            t.Join();
+
+            return textNoteContent;
+        }
 
     }
 

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Autodesk.DesignScript.Geometry;
 using iTextSharp.text.pdf;
 using Autodesk.DesignScript.Runtime;
-using Autodesk.DesignScript.Geometry;
+using System.Diagnostics;
 
 namespace DynamoPDF.Content
 {
@@ -51,6 +49,11 @@ namespace DynamoPDF.Content
         private DSCore.Color Color;
 
         /// <summary>
+        /// Line style
+        /// </summary>
+        private string LineStyle;
+
+        /// <summary>
         /// Get Annotation Color
         /// </summary>
         public DSCore.Color GetColor { get { return this.Color; } }
@@ -86,14 +89,20 @@ namespace DynamoPDF.Content
         public Geometry GetGeometry { get { return this.Geometry; } }
 
         /// <summary>
+        /// Get Line Style
+        /// </summary>
+        public string GetLineStyle { get { return this.LineStyle; } }
+
+        /// <summary>
         /// Annotation Object
         /// </summary>
-        /// <param name="created"></param>
-        /// <param name="updated"></param>
         /// <param name="contents"></param>
         /// <param name="author"></param>
+        /// <param name="subject"></param>
         /// <param name="geometry"></param>
-        public Annotation(string contents, string author, string subject,Geometry geometry, DSCore.Color color)
+        /// <param name="color"></param>
+        /// <param name="linestyle"></param>
+        public Annotation(string contents, string author, string subject,Geometry geometry, DSCore.Color color, string linestyle)
         {
             this.Created = DateTime.Now;
             this.Updated = DateTime.Now;
@@ -102,6 +111,7 @@ namespace DynamoPDF.Content
             this.Geometry = geometry;
             this.Color = color;
             this.Subject = subject;
+            this.LineStyle = linestyle;
         }
 
         /// <summary>
@@ -113,6 +123,41 @@ namespace DynamoPDF.Content
         public Annotation(PdfDictionary annotation, Geometry geometry)
         {
             this.Geometry = geometry;
+
+            PdfDictionary borderDict = annotation.GetAsDict(PdfName.BS);
+
+            //foreach (PdfName item in bsDict.Keys)
+            //{
+            //    Debug.WriteLine(item.ToString());
+            //}
+
+            //get line style
+            PdfArray linestyle = borderDict.GetAsArray(PdfName.D);
+
+            if (linestyle != null)
+            {
+                //Debug.WriteLine(linestyle.ToString());
+                switch (linestyle.ToString())
+                {
+                    case "[2, 2]":
+                        this.LineStyle = "Dashed 1";
+                        break;
+                    case "[4, 4]":
+                        this.LineStyle = "Dashed 3";
+                        break;
+                    case "[8, 4, 4, 4]":
+                        this.LineStyle = "Dashed 6";
+                        break;
+                    default:
+                        this.LineStyle = linestyle.ToString();
+                        break;
+                }
+            }
+            else
+            {
+                this.LineStyle = "Solid";
+            }
+
 
             PdfString createdString = annotation.GetAsString(PdfName.CREATIONDATE);
             this.Created = (createdString == null) ? DateTime.MinValue : createdString.ToString().ToDateTime();
@@ -128,8 +173,6 @@ namespace DynamoPDF.Content
 
             PdfString subject = annotation.GetAsString(PdfName.SUBJECT);
             this.Subject = (subject == null) ? string.Empty : subject.ToString();
-
-
 
             PdfArray color = annotation.GetAsArray(PdfName.C);
             if (color != null && color.Size == 3)
